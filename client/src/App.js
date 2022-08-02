@@ -4,13 +4,20 @@ import './App.css';
 
 function App() {
   const [ user, setUser ] = useState({})
+  const [ error, setError ] = useState(false)
 
   console.log(user)
 
   function handleCallbackResponse(response){
     console.log(response.credential);
     const userObject = jwt_decode(response.credential);
+
     console.log(userObject);
+    if (!userObject.email.includes("@mna.co")) {
+      setError(true)
+      return
+    }
+    setError(false)
     setUser(userObject);
     document.getElementById("sign-in-div").hidden = true;
   }
@@ -46,6 +53,11 @@ function App() {
           <img src={user.picture} alt=""/>
           <h1>{user.given_name} {user.family_name}</h1>
           <h2>{user.email}</h2>
+        </div>
+      }
+      { error &&
+        <div>
+          <h1>Error: you don't have the correct credentials to sign in.</h1>
         </div>
       }
     </div>
