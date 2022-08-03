@@ -12,8 +12,8 @@ function App() {
     console.log(response.credential);
     const userObject = jwt_decode(response.credential);
 
-    console.log(userObject);
-    if (!userObject.email.includes("@mna.co")) {
+    console.table("userObject", userObject.hd);
+    if (!userObject.email.includes("@mna.co") || userObject.hd !== "mna.co") {
       setError(true)
       return
     }
