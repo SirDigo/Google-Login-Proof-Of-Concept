@@ -43,7 +43,9 @@ function App() {
   }, [])
 
   return (
-    <div className="App"> 
+    <div className="App">
+      <h1>Welcome to minds + assembly!</h1> 
+      <p>This site is for employees only.</p>
       <div id='sign-in-div'></div>
       { Object.keys(user).length !== 0 &&
         <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
@@ -57,7 +59,7 @@ function App() {
       }
       { error &&
         <div>
-          <h1>Error: you don't have the correct credentials to sign in.</h1>
+          <h1>This site is for mna.co employees only.</h1>
         </div>
       }
     </div>
