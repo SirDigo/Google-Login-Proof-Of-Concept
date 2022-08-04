@@ -57,8 +57,7 @@ export default function Home({ user, setUser }){
 
   return (
     <div className="App">
-      <h1>Welcome to minds + assembly!</h1> 
-      <p>This site is for employees only.</p>
+      <h1>Welcome to minds + assembly!</h1>
       <div id='sign-in-div'>button</div>
       { Object.keys(user).length !== 0 &&
         <button onClick={(e) => handleSignOut(e)}>Sign Out</button>

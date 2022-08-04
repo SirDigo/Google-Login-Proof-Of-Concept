@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.App #sign-in-div iframe {
+  display: inline !important;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
