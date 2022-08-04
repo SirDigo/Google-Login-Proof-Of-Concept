@@ -1,69 +1,19 @@
-import { useEffect, useState } from 'react'
-import jwt_decode from "jwt-decode"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Chat from "./pages/Chat";
+import Navbar from "./components/Navbar";
 import './App.css';
 
 function App() {
-  const [ user, setUser ] = useState({})
-  const [ error, setError ] = useState(false)
-
-  console.log(user)
-
-  function handleCallbackResponse(response){
-    console.log(response.credential);
-    const userObject = jwt_decode(response.credential);
-
-    console.table("userObject", userObject.hd);
-    if (!userObject.email.includes("@mna.co") || userObject.hd !== "mna.co") {
-      setError(true)
-      return
-    }
-    setError(false)
-    setUser(userObject);
-    document.getElementById("sign-in-div").hidden = true;
-  }
-
-  function handleSignOut(e){
-    setUser({})
-    document.getElementById("sign-in-div").hidden = false;
-  }
-
-  useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id: "6042841804-vmcqfpokq00p7799st2qih3r9570vo3f.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    });
-
-    google.accounts.id.renderButton(
-      document.getElementById("sign-in-div"),
-      { theme: "outline", size: "large" }
-    )
-
-    google.accounts.id.prompt();
-  }, [])
-
   return (
-    <div className="App">
-      <h1>Welcome to minds + assembly!</h1> 
-      <p>This site is for employees only.</p>
-      <div id='sign-in-div'></div>
-      { Object.keys(user).length !== 0 &&
-        <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-      }
-      { user &&
-        <div>
-          <img src={user.picture} alt=""/>
-          <h1>{user.given_name} {user.family_name}</h1>
-          <h2>{user.email}</h2>
-        </div>
-      }
-      { error &&
-        <div>
-          <h1>This site is for mna.co employees only.</h1>
-        </div>
-      }
-    </div>
-  );
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" exact element={<Home/>}/>
+        <Route path="/chat" element={<Chat/>}/>
+      </Routes>
+    </Router>
+  )
 }
 
 export default App;
