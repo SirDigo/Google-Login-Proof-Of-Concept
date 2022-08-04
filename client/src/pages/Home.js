@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import jwt_decode from "jwt-decode"
 
-export default function Home(){
-    const [ user, setUser ] = useState({})
+export default function Home({ user, setUser }){
     const [ error, setError ] = useState(false)
 
   function handleCallbackResponse(response){

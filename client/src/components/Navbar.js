@@ -34,7 +34,7 @@ export default function Navbar(){
                 <Link to='/'>Home</Link>
             </li>
             <li>
-                <Link to='/chat'>Chat</Link>
+              <Link to='/chat'>Chat</Link> 
             </li>
         </ul>
     </StyledNav>
